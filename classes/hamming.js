@@ -64,7 +64,7 @@ class HammingCode {
 
     return [dataToDecode[2], dataToDecode[4], dataToDecode[5], dataToDecode[6]];
   }
-  // NEW: Вводить одиничну помилку в код
+  // Вводить одиничну помилку в код
   static injectError(data, position) {
     if (!Array.isArray(data) || data.length !== 7) {
       throw Error("injectError: input must be 7-bit array");
@@ -78,7 +78,7 @@ class HammingCode {
     return corrupted;
   }
 
-  // NEW: Перевіряє правильність коду (чи є помилка)
+  // Перевіряє правильність коду (чи є помилка)
   static isValid(data) {
     if (!Array.isArray(data) || data.length !== 7) {
       throw Error("isValid: input must be 7-bit array");
@@ -95,6 +95,19 @@ class HammingCode {
 
     return errorPosition === 0;
   }
+
+  static generateRandomData() {
+    return Array.from({ length: 4 }, () => Math.round(Math.random()));
+  }
+
+  static stringToBits(str) {
+    if (typeof str !== 'string' || !/^[01]{4}$/.test(str)) {
+      throw Error("stringToBits: input must be a 4-character string of 0 and 1");
+    }
+    return str.split('').map(Number);
+  }
+
+  
 }
 
 module.exports = HammingCode;
