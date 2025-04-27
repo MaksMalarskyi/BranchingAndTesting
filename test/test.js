@@ -29,3 +29,30 @@ describe('Hamming code testing', function() {
   });
 });
 
+
+describe('Positive unit tests', function() {
+
+  it('stringToBits converts valid string to bit array', function() {
+    let str = '1010';
+    let expected = [1, 0, 1, 0];
+    let result = hamming.stringToBits(str);
+    assert.deepEqual(result, expected);
+  });
+
+  it('isValid detects correct data without errors', function() {
+    let data = hamming.encode([1, 0, 0, 1]);
+    let valid = hamming.isValid(data);
+    assert.equal(valid, true);
+  });
+
+  it('generateRandomData produces 4 bits', function() {
+    let randomData = hamming.generateRandomData();
+    assert.equal(randomData.length, 4);
+    randomData.forEach(bit => {
+      assert.include([0, 1], bit);
+    });
+  });
+
+});
+
+
